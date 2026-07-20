@@ -1,0 +1,42 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  deploy-dev:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to dev
+        run: |
+          echo "Deploying to DEV environment"
+
+  deploy-staging:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to STAGING environment"
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/prod'
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to prod
+        run: |
+          echo "Deploying to PROD environment"
