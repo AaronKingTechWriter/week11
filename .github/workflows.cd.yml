@@ -1,0 +1,40 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Dev Secret
+        run: |
+          echo "Deploying to DEV"
+          echo "Secret loaded successfully"
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying to STAGING"
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to PROD"
